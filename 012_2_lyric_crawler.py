@@ -103,48 +103,101 @@ def obtain_data(id_list_od):
             idx_idc += 1
             # print(idx_idc)
         else:
-            idx_idc += 1
-            try:
-                waitTime_plus = waitTime_c * random.random()
-                fileN = '09' + str(idx_idc) + '_lyric_data_package.txt'
-                # print(fileN)
-                fx = open(fileN, 'w+')
-            except:
-                print('Open file ERROR')
-            if is_log:
-                print('Retrieving data: ' + lid[0] + ', ' + lid[1] + ', (' + str(idx_idc) + '/607)')
-            wt1 = waitTime1 * random.random()
-            time.sleep(wt1)
-            tmp_ln2 = lid[0] + ',' + lid[1] + '\n'
-            try:
-                fx.writelines(str(tmp_ln2))
-            except:
-                print('FileName Writeline ERROR')
-            for id_idx in range(2, len(lid)):
-                tmp_link = 'http://www.lyricsplanet.com/lyrics.php?id=' + lid[id_idx]
-                cur_lyric_pkg = get_single_lyric_info(tmp_link)
-                tmp_ln1 = str(cur_lyric_pkg) + '\n'
-                try:
-                    fx.writelines(tmp_ln1)
+            xl_0 = str(lid[0])
+            x_0 = xl_0[len(xl_0)-1:len(xl_0)]
+            xl_1 = str(lid[1])
+            x_1 = xl_1[len(xl_1)-1:len(xl_1)]
+            if x_0 == 'Y':
+                if x_1 == '7' or x_1 == '8' or x_1 == '9':
+                    idx_idc += 1
+                    try:
+                        waitTime_plus = waitTime_c * random.random()
+                        fileN = '09' + str(idx_idc) + '_lyric_data_package.txt'
+                        # print(fileN)
+                        fx = open(fileN, 'w+')
+                    except:
+                        print('Open file ERROR')
                     if is_log:
-                        print('\t>>\'' + str(cur_lyric_pkg[1]) + '\' ,gathered.')
-                        if is_verbose:
-                            print(tmp_link)
-                            print(cur_lyric_pkg)
-                            print(tmp_ln1)
-                except:
-                    print('Lyric Writeline ERROR')
-                # wait random time to open the link
-                wt2 = random.random() * waitTime2 + waitTime_plus
-                time.sleep(wt2)
-                # idx_tst += 1
-                # if idx_tst > 3:
-            #     break
-            # break
-            # idx_tst += 1
-            # if idx_tst > 3:
-            #     break
-            fx.close()
+                        print('Retrieving data: ' + lid[0] + ', ' + lid[1] + ', (' + str(idx_idc) + '/607)')
+                    wt1 = waitTime1 * random.random()
+                    time.sleep(wt1)
+                    tmp_ln2 = lid[0] + ',' + lid[1] + '\n'
+                    try:
+                        fx.writelines(str(tmp_ln2))
+                    except:
+                        print('FileName Writeline ERROR')
+                    for id_idx in range(2, len(lid)):
+                        tmp_link = 'http://www.lyricsplanet.com/lyrics.php?id=' + lid[id_idx]
+                        cur_lyric_pkg = get_single_lyric_info(tmp_link)
+                        tmp_ln1 = str(cur_lyric_pkg) + '\n'
+                        try:
+                            fx.writelines(tmp_ln1)
+                            if is_log:
+                                print('\t>>\'' + str(cur_lyric_pkg[1]) + '\' ,gathered.')
+                                if is_verbose:
+                                    print(tmp_link)
+                                    print(cur_lyric_pkg)
+                                    print(tmp_ln1)
+                        except:
+                            print('Lyric Writeline ERROR')
+                        # wait random time to open the link
+                        wt2 = random.random() * waitTime2 + waitTime_plus
+                        time.sleep(wt2)
+                        # idx_tst += 1
+                        # if idx_tst > 3:
+                    #     break
+                    # break
+                    # idx_tst += 1
+                    # if idx_tst > 3:
+                    #     break
+                    fx.close()
+
+        ###############################################################################################
+        # else:
+        #     idx_idc += 1
+        #     try:
+        #         waitTime_plus = waitTime_c * random.random()
+        #         fileN = '09' + str(idx_idc) + '_lyric_data_package.txt'
+        #         # print(fileN)
+        #         fx = open(fileN, 'w+')
+        #     except:
+        #         print('Open file ERROR')
+        #     if is_log:
+        #         print('Retrieving data: ' + lid[0] + ', ' + lid[1] + ', (' + str(idx_idc) + '/607)')
+        #     wt1 = waitTime1 * random.random()
+        #     time.sleep(wt1)
+        #     tmp_ln2 = lid[0] + ',' + lid[1] + '\n'
+        #     try:
+        #         fx.writelines(str(tmp_ln2))
+        #     except:
+        #         print('FileName Writeline ERROR')
+        #     for id_idx in range(2, len(lid)):
+        #         tmp_link = 'http://www.lyricsplanet.com/lyrics.php?id=' + lid[id_idx]
+        #         cur_lyric_pkg = get_single_lyric_info(tmp_link)
+        #         tmp_ln1 = str(cur_lyric_pkg) + '\n'
+        #         try:
+        #             fx.writelines(tmp_ln1)
+        #             if is_log:
+        #                 print('\t>>\'' + str(cur_lyric_pkg[1]) + '\' ,gathered.')
+        #                 if is_verbose:
+        #                     print(tmp_link)
+        #                     print(cur_lyric_pkg)
+        #                     print(tmp_ln1)
+        #         except:
+        #             print('Lyric Writeline ERROR')
+        #         # wait random time to open the link
+        #         wt2 = random.random() * waitTime2 + waitTime_plus
+        #         time.sleep(wt2)
+        #         # idx_tst += 1
+        #         # if idx_tst > 3:
+        #     #     break
+        #     # break
+        #     # idx_tst += 1
+        #     # if idx_tst > 3:
+        #     #     break
+        #     fx.close()
+        ###############################################################################################
+
 
 def get_single_lyric_info(tmp_link):
     try:
