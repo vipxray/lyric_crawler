@@ -1,5 +1,9 @@
+# Webcrawler for crawling all the link of the searching result,
+# which the pattern is the lyric stated with letter according to alphabet.
+# Then save all the lyric id, crawler form the link to text file for further crawling
+#
 # Author: Haorui Chen
-# Update: Aug 26
+# Update: Dec 10 2017
 
 from bs4 import BeautifulSoup
 import requests
@@ -28,13 +32,12 @@ headers = {
 }
 
 # variables:
-# wait time in between (0,15) seconds
+# wait time in between (0,10) seconds
 wait_time = 10
 lyric_id_list_list = []
 
 
 # FUNCTION:
-
 # get the last_page number of each search of each starting letter
 def get_last_page(start_letter):
     tmp_link = url_title_search_link + start_letter

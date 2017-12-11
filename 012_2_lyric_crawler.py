@@ -1,5 +1,7 @@
+# This crawler is to using local saved lyrics id to assemble the lyric links for retrieving lyrics data.
+#
 # Author: Haorui Chen
-# Update: Sept 22
+# Update: Dec 10 2017
 
 from bs4 import BeautifulSoup
 import requests
@@ -48,10 +50,10 @@ waitTime2 = 0.5
 waitTime_c = 0
 # wt = random.random() * waitTime
 
-# data starting point6
-# TODO: \\continue from #584
-idx_start = 552
-# TO 559
+# data starting point, range(0, 608)
+# according to the data, we have 607 list of id. Each node will contains at most 100 lyrics id.
+idx_start = 0
+
 
 
 # Functions:
@@ -62,7 +64,6 @@ def getID(fName):
         f_id_list = open(fName, 'r+')
         ln_1 = f_id_list.readline()
         while ln_1:
-            # TODO: process current line to get pageNumber and lyricID
             tmp_line = ln_1.split(',')
             tmp_id_list.append(tmp_line)
             ln_1 = f_id_list.readline()
@@ -198,7 +199,6 @@ def obtain_data(id_list_od):
         #     fx.close()
         ###############################################################################################
 
-
 def get_single_lyric_info(tmp_link):
     try:
         this_lyric_data = []
@@ -224,16 +224,24 @@ def get_single_lyric_info(tmp_link):
         print('Exception: get_single_lyric_info()')
 
 
+
+
+
 # Main #
+####################################################
+# First, the data need to be cleaned first         #
+# Second, get lyric ID from local file             #
+# Third, retrive all the lyric data using lyric id #
+####################################################
 
 # clean data: (DONE)
-#clean_data_file(old_file_name)
+clean_data_file(old_file_name)
 
 # get lyric's id from local index file
 id_list = getID(file_name)
 
 # check if data is complete
-#print_data(id_list)
+print_data(id_list)
 
 # retrive data using the id
 obtain_data(id_list)

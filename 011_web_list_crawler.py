@@ -1,5 +1,8 @@
+# Webcrawler for lyrocsplanet.com
+# this crawler is to crawl the all lyric website link from  www.lyricsplanet.com/links.php website.
+
 # Author: Haorui Chen
-# Update: Aug 26
+# Update: Dec 10 2017
 
 
 from bs4 import BeautifulSoup
@@ -17,7 +20,6 @@ is_log = 1
 #browser = webdriver.Firefox()#Chrome('./chromedriver.exe')
 url_hp = 'http://www.lyricsplanet.com/'
 url_hp_link = 'http://www.lyricsplanet.com/links.php'
-
 headers = {
     'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6',
     'Connection': 'keep-alive',
@@ -26,6 +28,7 @@ headers = {
                   'Chrome/58.0.3029.110 Safari/537.36'
 }
 
+# Methods:
 
 def get_web_list():
     # send a request to the target website
@@ -36,11 +39,13 @@ def get_web_list():
         if is_verbose:
             print(homepage_html.title)
             print(homepage_html.text)
+    # Resolve the data and extract the table elements
     soup = BeautifulSoup(homepage_html.content, "lxml")
     tmp_01 = str(soup.table('a'))
     # save all lyric website into a txt file
     foo = open('011_lyric_list_crawler_website_links.txt', 'w+')
     counter_01 = 1
+    # find all linkes
     has_link = tmp_01.find('www')
     while has_link != -1:
         idx_01 = has_link
@@ -62,11 +67,10 @@ def get_web_list():
 
 
 # main()
-# try:
-#     get_web_list()
-# except:
-#     print('get_web_list() failed.')
-get_web_list()
+try:
+    get_web_list()
+except:
+    print('\t ERROR: get_web_list() failed.')
 
 
 
